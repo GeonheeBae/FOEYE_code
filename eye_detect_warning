@@ -59,14 +59,16 @@ while True:
         cv2.drawContours (frame, [rightEyeHull], -1, (0, 255, 0), 1)
 
         eyedistance = dist.euclidean(leftEye[0], leftEye[3]) 
-        distance = 660/eyedistance        # 모니터와의 거리감지
+        # 모니터와의 거리감지
+        distance = 660/eyedistance        
         print(distance)
 
 
         now = time.time()
         TIME = now - start
+         # 눈 깜빡임 카운트
         if ear < EYE_AR_THRESH:
-            COUNTER += 1     # 눈 깜빡임 카운트
+            COUNTER += 1     
         else:
             if COUNTER >= EYE_AR_CONSEC_FRAMES:
                 TOTAL += 1
@@ -79,7 +81,7 @@ while True:
         cv2.putText(frame, "distance: {:.2f}".format(distance), (10, 50),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
 
-
+        # 경보 횟수와 모니터 거리는 강남 성모원 안과 자료 참고
         if TIME > 0:
             cv2.putText(frame, "Time: {:.2f}".format(TIME), (300, 50),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
